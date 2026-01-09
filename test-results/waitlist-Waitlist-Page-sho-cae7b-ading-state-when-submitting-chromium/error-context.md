@@ -1,0 +1,299 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "Kizento" [ref=e5] [cursor=pointer]:
+          - /url: /
+          - img "Kizento" [ref=e6]
+        - generic [ref=e7]:
+          - link "Collection" [ref=e8] [cursor=pointer]:
+            - /url: /collection
+          - link "Notre histoire" [ref=e9] [cursor=pointer]:
+            - /url: /story
+          - link "Journal" [ref=e10] [cursor=pointer]:
+            - /url: /blog
+          - link "Contact" [ref=e11] [cursor=pointer]:
+            - /url: /contact
+        - generic [ref=e12]:
+          - link "Favoris" [ref=e13] [cursor=pointer]:
+            - /url: /account/wishlist
+            - img
+          - button "Panier" [ref=e14] [cursor=pointer]:
+            - img
+  - main [ref=e15]:
+    - generic [ref=e16]:
+      - generic [ref=e21]:
+        - generic [ref=e22]:
+          - heading "Votre pause déjeuner mérite mieux" [level=1] [ref=e24]
+          - paragraph [ref=e26]: Savourez un vrai repas chaud, où que vous soyez. Nos bentos isothermes préservent la chaleur et les saveurs pendant des heures.
+          - link "Découvrir la collection" [ref=e29] [cursor=pointer]:
+            - /url: /collections
+            - text: Découvrir la collection
+            - img
+          - generic [ref=e31]:
+            - generic [ref=e38]: +2000 clients satisfaits
+            - generic [ref=e39]:
+              - img [ref=e40]
+              - img [ref=e42]
+              - img [ref=e44]
+              - img [ref=e46]
+              - img [ref=e48]
+              - generic [ref=e50]: 4.9/5
+        - link "Bento box japonais avec saumon grillé, riz, légumes et tamagoyaki Voir le produit Best-seller KIZENTO Signature 89€" [ref=e52] [cursor=pointer]:
+          - /url: /products/kizento-signature
+          - img "Bento box japonais avec saumon grillé, riz, légumes et tamagoyaki" [ref=e53]
+          - generic:
+            - generic: Voir le produit
+          - generic [ref=e57]:
+            - generic [ref=e58]:
+              - paragraph [ref=e59]: Best-seller
+              - paragraph [ref=e60]: KIZENTO Signature
+            - paragraph [ref=e61]: 89€
+      - generic [ref=e63]: Découvrir
+    - generic [ref=e66]:
+      - heading "Conçu pour votre quotidien" [level=2] [ref=e68]
+      - generic [ref=e69]:
+        - generic [ref=e71]:
+          - img [ref=e73]
+          - heading "Isotherme 6h+" [level=3] [ref=e75]
+          - paragraph [ref=e76]: Double paroi sous vide pour garder vos repas chauds jusqu'à 6 heures
+        - generic [ref=e80]:
+          - img [ref=e82]
+          - heading "Design japonais épuré" [level=3] [ref=e85]
+          - paragraph [ref=e86]: Lignes minimalistes inspirées de l'artisanat traditionnel nippon
+        - generic [ref=e90]:
+          - img [ref=e92]
+          - heading "Matériaux premium" [level=3] [ref=e94]
+          - paragraph [ref=e95]: Acier inoxydable 18/8, sans BPA, conçu pour durer des années
+        - generic [ref=e99]:
+          - img [ref=e101]
+          - heading "Transport facile" [level=3] [ref=e104]
+          - paragraph [ref=e105]: Compact et léger, il se glisse partout avec élégance
+    - generic [ref=e110]:
+      - generic [ref=e111]:
+        - generic [ref=e114]:
+          - img [ref=e116]
+          - paragraph [ref=e118]: Image produit grand format
+        - paragraph [ref=e121]: 89€
+      - generic [ref=e123]:
+        - generic [ref=e124]:
+          - generic [ref=e125]: Notre signature
+          - heading "Le Bento Haru" [level=2] [ref=e126]
+        - paragraph [ref=e128]: Notre modèle emblématique allie performance thermique exceptionnelle et esthétique raffinée. Chaque détail a été pensé pour transformer votre pause déjeuner en un moment de pure sérénité.
+        - list [ref=e130]:
+          - listitem [ref=e131]:
+            - img [ref=e133]
+            - generic [ref=e135]: Capacité généreuse de 750ml
+          - listitem [ref=e136]:
+            - img [ref=e138]
+            - generic [ref=e140]: Couvercle hermétique anti-fuite
+          - listitem [ref=e141]:
+            - img [ref=e143]
+            - generic [ref=e145]: Passe au lave-vaisselle
+        - link "Voir le produit" [ref=e148] [cursor=pointer]:
+          - /url: /products/bento-haru
+          - text: Voir le produit
+          - img
+    - generic [ref=e150]:
+      - generic [ref=e151]:
+        - heading "Votre nouveau rituel" [level=2] [ref=e152]
+        - paragraph [ref=e153]: Trois gestes simples pour une pause déjeuner réinventée
+      - generic [ref=e156]:
+        - generic [ref=e157]:
+          - generic [ref=e158]:
+            - generic [ref=e160]: "01"
+            - img [ref=e163]
+            - heading "Préparez" [level=3] [ref=e165]
+            - paragraph [ref=e166]: Le matin, glissez votre repas fait maison dans votre bento. Un geste de soin pour vous-même.
+          - img [ref=e168]
+        - generic [ref=e170]:
+          - generic [ref=e171]:
+            - generic [ref=e173]: "02"
+            - img [ref=e176]
+            - heading "Emportez" [level=3] [ref=e178]
+            - paragraph [ref=e179]: Votre bento vous accompagne partout. Au bureau, en déplacement, en voyage.
+          - img [ref=e181]
+        - generic [ref=e184]:
+          - generic [ref=e186]: "03"
+          - img [ref=e189]
+          - heading "Savourez" [level=3] [ref=e191]
+          - paragraph [ref=e192]: À l'heure du déjeuner, retrouvez un repas chaud et délicieux. Un vrai moment de plaisir.
+    - generic [ref=e194]:
+      - heading "Ce qu'ils en disent" [level=2] [ref=e196]
+      - generic [ref=e197]:
+        - generic [ref=e199]:
+          - img [ref=e202]
+          - blockquote [ref=e205]:
+            - paragraph [ref=e206]: “Fini les repas froids au bureau ! Mon bento Kizento garde tout parfaitement chaud jusqu'à 14h. Un vrai bonheur de retrouver un repas maison le midi.”
+          - generic [ref=e207]:
+            - generic [ref=e208]: S
+            - generic [ref=e209]:
+              - paragraph [ref=e210]: Sophie M.
+              - paragraph [ref=e211]: Architecte, Paris
+          - generic [ref=e212]:
+            - img [ref=e213]
+            - img [ref=e215]
+            - img [ref=e217]
+            - img [ref=e219]
+            - img [ref=e221]
+        - generic [ref=e224]:
+          - img [ref=e227]
+          - blockquote [ref=e230]:
+            - paragraph [ref=e231]: “Le design est magnifique, mais c'est surtout l'efficacité qui m'a bluffé. Même après 5 heures, mon curry était encore fumant. Qualité exceptionnelle.”
+          - generic [ref=e232]:
+            - generic [ref=e233]: T
+            - generic [ref=e234]:
+              - paragraph [ref=e235]: Thomas L.
+              - paragraph [ref=e236]: Consultant, Lyon
+          - generic [ref=e237]:
+            - img [ref=e238]
+            - img [ref=e240]
+            - img [ref=e242]
+            - img [ref=e244]
+            - img [ref=e246]
+        - generic [ref=e249]:
+          - img [ref=e252]
+          - blockquote [ref=e255]:
+            - paragraph [ref=e256]: “J'ai enfin trouvé une alternative aux sandwichs tristes du midi. Mon Kizento m'a réconciliée avec la pause déjeuner. C'est devenu mon petit rituel bien-être.”
+          - generic [ref=e257]:
+            - generic [ref=e258]: C
+            - generic [ref=e259]:
+              - paragraph [ref=e260]: Camille R.
+              - paragraph [ref=e261]: Professeure, Bordeaux
+          - generic [ref=e262]:
+            - img [ref=e263]
+            - img [ref=e265]
+            - img [ref=e267]
+            - img [ref=e269]
+            - img [ref=e271]
+    - generic [ref=e274]:
+      - heading "Un art de vivre" [level=2] [ref=e276]
+      - generic [ref=e277]:
+        - img [ref=e282] [cursor=pointer]
+        - img [ref=e289] [cursor=pointer]
+        - img [ref=e296] [cursor=pointer]
+        - img [ref=e303] [cursor=pointer]
+        - img [ref=e310] [cursor=pointer]
+        - img [ref=e317] [cursor=pointer]
+      - link "Suivez-nous sur Instagram" [ref=e321] [cursor=pointer]:
+        - /url: https://instagram.com/kizento
+        - img [ref=e322]
+        - text: Suivez-nous sur Instagram
+    - generic [ref=e329]:
+      - heading "Rejoignez l'art de la pause déjeuner" [level=2] [ref=e331]
+      - paragraph [ref=e333]: Recettes, conseils et avant-premières exclusives
+      - generic [ref=e336]:
+        - img [ref=e337]
+        - textbox "Votre adresse email" [ref=e340]
+        - button "S'inscrire" [ref=e341]:
+          - generic [ref=e342]: S'inscrire
+          - img [ref=e343]
+      - paragraph [ref=e346]:
+        - text: Une newsletter par mois maximum. Désabonnement en un clic.
+        - link "Politique de confidentialité" [ref=e347] [cursor=pointer]:
+          - /url: /confidentialite
+    - generic [ref=e348]:
+      - img [ref=e354]
+      - generic [ref=e357]:
+        - generic [ref=e359]:
+          - img [ref=e360]
+          - generic [ref=e363]: Rejoignez la communauté
+        - heading "Rejoignez l'art de la pause déjeuner" [level=2] [ref=e365]
+        - paragraph [ref=e367]: Recettes, conseils et avant-premières exclusives
+        - generic [ref=e372]:
+          - generic [ref=e373]:
+            - generic:
+              - img
+            - textbox "Votre adresse email" [ref=e374]
+          - button "S'inscrire" [ref=e375]:
+            - generic [ref=e377]:
+              - text: S'inscrire
+              - img [ref=e378]
+        - generic [ref=e381]:
+          - generic [ref=e384]: 1 newsletter par mois max
+          - generic [ref=e387]: Désabonnement en 1 clic
+          - generic [ref=e390]: Pas de spam, promis
+        - link "Politique de confidentialité" [ref=e392] [cursor=pointer]:
+          - /url: /confidentialite
+          - text: Politique de confidentialité
+          - img [ref=e393]
+  - contentinfo [ref=e395]:
+    - generic [ref=e396]:
+      - generic [ref=e398]:
+        - generic [ref=e399]:
+          - link "Kizento" [ref=e400] [cursor=pointer]:
+            - /url: /
+            - img "Kizento" [ref=e401]
+          - paragraph [ref=e402]: L'art de la pause déjeuner, réinventé.
+          - generic [ref=e403]:
+            - link "Instagram" [ref=e404] [cursor=pointer]:
+              - /url: https://instagram.com/kizento
+              - img [ref=e405]
+            - link "Facebook" [ref=e408] [cursor=pointer]:
+              - /url: https://facebook.com/kizento
+              - img [ref=e409]
+            - link "Twitter" [ref=e411] [cursor=pointer]:
+              - /url: https://twitter.com/kizento
+              - img [ref=e412]
+        - generic [ref=e414]:
+          - heading "Boutique" [level=3] [ref=e415]
+          - list [ref=e416]:
+            - listitem [ref=e417]:
+              - link "Collection" [ref=e418] [cursor=pointer]:
+                - /url: /collection
+            - listitem [ref=e419]:
+              - link "Bento Haru" [ref=e420] [cursor=pointer]:
+                - /url: /bento-haru
+            - listitem [ref=e421]:
+              - link "Accessoires" [ref=e422] [cursor=pointer]:
+                - /url: /accessoires
+            - listitem [ref=e423]:
+              - link "Coffrets cadeaux" [ref=e424] [cursor=pointer]:
+                - /url: /coffrets
+        - generic [ref=e425]:
+          - heading "À propos" [level=3] [ref=e426]
+          - list [ref=e427]:
+            - listitem [ref=e428]:
+              - link "Notre histoire" [ref=e429] [cursor=pointer]:
+                - /url: /story
+            - listitem [ref=e430]:
+              - link "Engagement qualité" [ref=e431] [cursor=pointer]:
+                - /url: /qualite
+            - listitem [ref=e432]:
+              - link "Journal" [ref=e433] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e434]:
+              - link "Presse" [ref=e435] [cursor=pointer]:
+                - /url: /presse
+        - generic [ref=e436]:
+          - heading "Aide" [level=3] [ref=e437]
+          - list [ref=e438]:
+            - listitem [ref=e439]:
+              - link "FAQ" [ref=e440] [cursor=pointer]:
+                - /url: /faq
+            - listitem [ref=e441]:
+              - link "Livraison" [ref=e442] [cursor=pointer]:
+                - /url: /livraison
+            - listitem [ref=e443]:
+              - link "Retours" [ref=e444] [cursor=pointer]:
+                - /url: /retours
+            - listitem [ref=e445]:
+              - link "Contact" [ref=e446] [cursor=pointer]:
+                - /url: /contact
+      - generic [ref=e448]:
+        - paragraph [ref=e449]: © 2024 Kizento. Tous droits réservés.
+        - generic [ref=e450]:
+          - link "Mentions légales" [ref=e451] [cursor=pointer]:
+            - /url: /mentions-legales
+          - link "CGV" [ref=e452] [cursor=pointer]:
+            - /url: /cgv
+          - link "Politique de confidentialité" [ref=e453] [cursor=pointer]:
+            - /url: /confidentialite
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e459] [cursor=pointer]:
+    - img [ref=e460]
+  - alert [ref=e463]
+```
