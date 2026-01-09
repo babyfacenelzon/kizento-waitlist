@@ -81,7 +81,7 @@ export function WaitlistForm(): React.ReactElement {
       onSubmit={handleSubmit}
       className="w-full max-w-xl"
     >
-      <div className="flex flex-col sm:flex-row gap-3 p-2 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10">
+      <div className="flex flex-col sm:flex-row gap-3 p-2 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 transition-all duration-300 focus-within:border-[#7B8B6F]/50 focus-within:shadow-[0_0_20px_rgba(123,139,111,0.3)]">
         <div className="flex-1 flex items-center gap-3 px-4">
           <Mail className="h-5 w-5 text-white/50 flex-shrink-0" />
           <input
@@ -107,7 +107,7 @@ export function WaitlistForm(): React.ReactElement {
         <button
           type="submit"
           disabled={status === "loading"}
-          className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#7B8B6F] hover:bg-[#8E9F82] text-white font-medium transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#7B8B6F] hover:bg-[#8E9F82] text-white font-medium transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
         >
           {status === "loading" ? (
             <Loader2 className="h-5 w-5 animate-spin" />
