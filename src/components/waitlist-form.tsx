@@ -1,15 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { motion } from "framer-motion"
+import { Mail, ArrowRight, Loader2, Check } from "lucide-react"
 import { toast } from "sonner"
 
-type FormState = "idle" | "loading" | "success" | "error"
+type FormStatus = "idle" | "loading" | "success"
 
 export function WaitlistForm(): React.ReactElement {
   const [email, setEmail] = useState("")
-  const [formState, setFormState] = useState<FormState>("idle")
+  const [status, setStatus] = useState<FormStatus>("idle")
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault()
@@ -17,10 +17,9 @@ export function WaitlistForm(): React.ReactElement {
     const formData = new FormData(e.currentTarget)
     const honeypot = formData.get("website") as string
 
-    // Honeypot check (should be empty)
+    // Honeypot check (anti-bot)
     if (honeypot) {
-      // Silently reject bot submissions
-      setFormState("success")
+      setStatus("success")
       return
     }
 
@@ -29,7 +28,7 @@ export function WaitlistForm(): React.ReactElement {
       return
     }
 
-    setFormState("loading")
+    setStatus("loading")
 
     try {
       const response = await fetch("/api/waitlist", {
@@ -44,83 +43,82 @@ export function WaitlistForm(): React.ReactElement {
         throw new Error(data.error || "Une erreur est survenue")
       }
 
-      setFormState("success")
+      setStatus("success")
       setEmail("")
-      toast.success("Bienvenue ! Vous êtes sur la liste.")
+      toast.success("Vous êtes sur la liste !")
     } catch (error) {
-      setFormState("error")
       const message = error instanceof Error ? error.message : "Une erreur est survenue"
       toast.error(message)
+      setStatus("idle")
     }
   }
 
-  if (formState === "success") {
+  if (status === "success") {
     return (
-      <div className="text-center space-y-2">
-        <p className="text-kizento-primary font-medium">Merci !</p>
-        <p className="text-sm text-muted-foreground">
-          Vous recevrez un email dès le lancement.
-        </p>
-      </div>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10"
+      >
+        <div className="h-10 w-10 rounded-full bg-[#7B8B6F] flex items-center justify-center">
+          <Check className="h-5 w-5 text-white" />
+        </div>
+        <div>
+          <p className="font-medium text-white">Merci !</p>
+          <p className="text-sm text-white/70">
+            Vous serez notifié en avant-première.
+          </p>
+        </div>
+      </motion.div>
     )
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4">
-      <div className="flex flex-col sm:flex-row gap-3">
-        <Input
-          type="email"
-          name="email"
-          placeholder="votre@email.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          disabled={formState === "loading"}
-          className="flex-1 h-12 bg-white/80 border-kizento-primary/20 focus:border-kizento-primary focus:ring-kizento-primary/20"
-        />
-        {/* Honeypot field - hidden from users, visible to bots */}
-        <input
-          type="text"
-          name="website"
-          tabIndex={-1}
-          autoComplete="off"
-          className="absolute opacity-0 h-0 w-0 pointer-events-none"
-          aria-hidden="true"
-        />
-        <Button
+    <motion.form
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.4 }}
+      onSubmit={handleSubmit}
+      className="w-full max-w-xl"
+    >
+      <div className="flex flex-col sm:flex-row gap-3 p-2 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10">
+        <div className="flex-1 flex items-center gap-3 px-4">
+          <Mail className="h-5 w-5 text-white/50 flex-shrink-0" />
+          <input
+            type="email"
+            name="email"
+            placeholder="Votre adresse email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            disabled={status === "loading"}
+            className="flex-1 bg-transparent text-white placeholder:text-white/50 outline-none py-3 disabled:opacity-50"
+          />
+          {/* Honeypot field - hidden from users */}
+          <input
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            className="absolute opacity-0 h-0 w-0 pointer-events-none"
+            aria-hidden="true"
+          />
+        </div>
+        <button
           type="submit"
-          disabled={formState === "loading"}
-          className="h-12 px-6 bg-kizento-primary hover:bg-kizento-primary/90 text-white font-medium"
+          disabled={status === "loading"}
+          className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#7B8B6F] hover:bg-[#8E9F82] text-white font-medium transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {formState === "loading" ? (
-            <span className="flex items-center gap-2">
-              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  fill="none"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                />
-              </svg>
-              Envoi...
-            </span>
+          {status === "loading" ? (
+            <Loader2 className="h-5 w-5 animate-spin" />
           ) : (
-            "Rejoindre la liste"
+            <>
+              S&apos;inscrire
+              <ArrowRight className="h-4 w-4" />
+            </>
           )}
-        </Button>
+        </button>
       </div>
-      <p className="text-xs text-center text-muted-foreground">
-        En vous inscrivant, vous acceptez de recevoir des emails de Kizento.
-        Pas de spam, uniquement des nouvelles importantes.
-      </p>
-    </form>
+    </motion.form>
   )
 }

@@ -1,54 +1,33 @@
-import { Logo } from "@/components/logo"
+import Link from "next/link"
+import { AnimatedBackground } from "@/components/animated-background"
+import { BadgePill } from "@/components/badge-pill"
+import { HeroTitle } from "@/components/hero-title"
 import { WaitlistForm } from "@/components/waitlist-form"
-import { Benefits } from "@/components/benefits"
-import { SocialLinks } from "@/components/social-links"
+import { TrustBadges } from "@/components/trust-badges"
 import { Toaster } from "@/components/ui/sonner"
 
 export default function Home(): React.ReactElement {
   return (
     <>
-      <Toaster position="top-center" />
-      <div className="seigaiha-pattern min-h-screen flex flex-col">
-        {/* Main content - centered */}
-        <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
-          <div className="w-full max-w-xl flex flex-col items-center gap-10">
-            {/* Logo */}
-            <div className="opacity-0 animate-fade-in-up">
-              <Logo />
-            </div>
+      <Toaster position="top-center" theme="dark" />
+      <main className="relative min-h-screen flex flex-col items-center justify-center px-4 py-16">
+        <AnimatedBackground />
 
-            {/* Hero text */}
-            <div className="text-center space-y-4 opacity-0 animate-fade-in-up animation-delay-100">
-              <h1 className="text-3xl sm:text-4xl font-light text-kizento-text tracking-tight">
-                L&apos;art du bento, réinventé.
-              </h1>
-              <p className="text-lg text-muted-foreground max-w-md mx-auto">
-                Bentos isothermes premium, design japonais. Bientôt disponible.
-              </p>
-            </div>
+        <div className="relative z-10 flex flex-col items-center gap-8 max-w-2xl mx-auto text-center">
+          <BadgePill />
+          <HeroTitle />
+          <WaitlistForm />
+          <TrustBadges />
 
-            {/* Waitlist form */}
-            <div className="w-full flex justify-center opacity-0 animate-fade-in-up animation-delay-200">
-              <WaitlistForm />
-            </div>
-
-            {/* Benefits */}
-            <div className="w-full flex justify-center">
-              <Benefits />
-            </div>
-          </div>
-        </main>
-
-        {/* Footer */}
-        <footer className="py-8 px-6 border-t border-kizento-primary/10">
-          <div className="max-w-xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} Kizento. Tous droits réservés.
-            </p>
-            <SocialLinks />
-          </div>
-        </footer>
-      </div>
+          <Link
+            href="/privacy"
+            className="text-sm text-white/50 hover:text-white/70 transition-colors flex items-center gap-1"
+          >
+            Politique de confidentialité
+            <span>→</span>
+          </Link>
+        </div>
+      </main>
     </>
   )
 }
