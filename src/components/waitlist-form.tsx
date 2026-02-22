@@ -2,14 +2,41 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Mail, ArrowRight, Loader2, Check } from "lucide-react"
+import { Mail, ArrowRight, Loader2, Check, AlertCircle } from "lucide-react"
 import { toast } from "sonner"
 
 type FormStatus = "idle" | "loading" | "success"
 
+function cn(...classes: (string | boolean | undefined)[]): string {
+  return classes.filter(Boolean).join(" ")
+}
+
+function validateEmail(email: string): string | null {
+  if (!email) return "Email requis"
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Format email invalide"
+  return null
+}
+
 export function WaitlistForm(): React.ReactElement {
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState<FormStatus>("idle")
+  const [isFocused, setIsFocused] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [touched, setTouched] = useState(false)
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>): void {
+    const value = e.target.value
+    setEmail(value)
+    if (touched) {
+      setError(validateEmail(value))
+    }
+  }
+
+  function handleBlur(): void {
+    setIsFocused(false)
+    setTouched(true)
+    setError(validateEmail(email))
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault()
@@ -23,8 +50,11 @@ export function WaitlistForm(): React.ReactElement {
       return
     }
 
-    if (!email || !email.includes("@")) {
-      toast.error("Veuillez entrer une adresse email valide")
+    const validationError = validateEmail(email)
+    if (validationError) {
+      setTouched(true)
+      setError(validationError)
+      toast.error(validationError)
       return
     }
 
@@ -37,7 +67,7 @@ export function WaitlistForm(): React.ReactElement {
         body: JSON.stringify({ email }),
       })
 
-      const data = await response.json()
+      const data = await response.json() as { error?: string }
 
       if (!response.ok) {
         throw new Error(data.error || "Une erreur est survenue")
@@ -45,33 +75,18 @@ export function WaitlistForm(): React.ReactElement {
 
       setStatus("success")
       setEmail("")
+      setTouched(false)
+      setError(null)
       toast.success("Vous êtes sur la liste !")
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "Une erreur est survenue"
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Une erreur est survenue"
       toast.error(message)
       setStatus("idle")
     }
   }
 
-  if (status === "success") {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10"
-      >
-        <div className="h-10 w-10 rounded-full bg-[#7B8B6F] flex items-center justify-center">
-          <Check className="h-5 w-5 text-white" />
-        </div>
-        <div>
-          <p className="font-medium text-white">Merci !</p>
-          <p className="text-sm text-white/70">
-            Vous serez notifié en avant-première.
-          </p>
-        </div>
-      </motion.div>
-    )
-  }
+  const isValid = !error && touched && email.length > 0
+  const showError = Boolean(error && touched)
 
   return (
     <motion.form
@@ -79,46 +94,110 @@ export function WaitlistForm(): React.ReactElement {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.4 }}
       onSubmit={handleSubmit}
-      className="w-full max-w-xl"
+      className="w-full max-w-lg"
     >
-      <div className="flex flex-col sm:flex-row gap-3 p-2 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 transition-all duration-300 focus-within:border-[#7B8B6F]/50 focus-within:shadow-[0_0_20px_rgba(123,139,111,0.3)]">
-        <div className="flex-1 flex items-center gap-3 px-4">
-          <Mail className="h-5 w-5 text-white/50 flex-shrink-0" />
-          <input
-            type="email"
-            name="email"
-            placeholder="Votre adresse email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            disabled={status === "loading"}
-            className="flex-1 bg-transparent text-white placeholder:text-white/50 outline-none py-3 disabled:opacity-50"
-          />
-          {/* Honeypot field - hidden from users */}
-          <input
-            type="text"
-            name="website"
-            tabIndex={-1}
-            autoComplete="off"
-            className="absolute opacity-0 h-0 w-0 pointer-events-none"
-            aria-hidden="true"
-          />
+      {status === "success" ? (
+        /* Success State */
+        <div className="flex items-center justify-center gap-3 h-14 px-6 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 w-full">
+          <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#9BA78F]/20">
+            <Check className="w-4 h-4 text-[#9BA78F]" />
+          </div>
+          <span className="font-medium">Bienvenue dans la famille !</span>
         </div>
-        <button
-          type="submit"
-          disabled={status === "loading"}
-          className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#7B8B6F] hover:bg-[#8E9F82] text-white font-medium transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
-        >
-          {status === "loading" ? (
-            <Loader2 className="h-5 w-5 animate-spin" />
-          ) : (
-            <>
-              S&apos;inscrire
-              <ArrowRight className="h-4 w-4" />
-            </>
+      ) : (
+        /* Form State - Modern pill design */
+        <div className="w-full">
+          <div className={cn(
+            "relative flex items-center w-full",
+            "pl-4 pr-1.5 py-1.5 rounded-2xl",
+            "bg-white/10 backdrop-blur-sm",
+            "border transition-all duration-300",
+            // Default border
+            !isFocused && !showError && !isValid && "border-white/20",
+            // Focus state
+            isFocused && !showError && "border-white/40 bg-white/15 shadow-[0_0_20px_rgba(255,255,255,0.1)]",
+            // Error state
+            showError && "border-red-400/50 bg-red-400/5",
+            // Valid state
+            isValid && !isFocused && "border-[#9BA78F]/50 bg-[#9BA78F]/5"
+          )}>
+            {/* Mail icon */}
+            <Mail className={cn(
+              "w-5 h-5 flex-shrink-0 transition-colors duration-300",
+              showError ? "text-red-400" : isValid ? "text-[#9BA78F]" : isFocused ? "text-white" : "text-white/50"
+            )} />
+
+            {/* Email Input */}
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={handleChange}
+              onFocus={() => setIsFocused(true)}
+              onBlur={handleBlur}
+              placeholder="Votre email"
+              disabled={status === "loading"}
+              className={cn(
+                "flex-1 h-full px-3 bg-transparent",
+                "text-white placeholder:text-white/50",
+                "focus:outline-none",
+                "disabled:opacity-50 disabled:cursor-not-allowed"
+              )}
+            />
+
+            {/* Status icon */}
+            {showError && (
+              <AlertCircle className="w-5 h-5 text-red-400 mr-2 flex-shrink-0" />
+            )}
+            {isValid && !isFocused && (
+              <Check className="w-5 h-5 text-[#9BA78F] mr-2 flex-shrink-0" />
+            )}
+
+            {/* Honeypot field - hidden from users */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              className="absolute opacity-0 h-0 w-0 pointer-events-none"
+              aria-hidden="true"
+            />
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={status === "loading"}
+              className={cn(
+                "group relative flex items-center justify-center gap-2",
+                "h-11 px-6 rounded-xl overflow-hidden",
+                "bg-white text-[#2D3B2D] font-semibold",
+                "transition-all duration-500 ease-out",
+                "hover:bg-[#FAFAF5] hover:shadow-[0_8px_30px_rgba(123,139,111,0.25)]",
+                "hover:scale-[1.02]",
+                "active:scale-[0.98] active:shadow-[0_4px_15px_rgba(123,139,111,0.2)]",
+                "disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer"
+              )}
+            >
+              {/* Subtle shine effect on hover */}
+              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+
+              {status === "loading" ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <>
+                  <span className="hidden sm:inline relative">S&apos;inscrire</span>
+                  <ArrowRight className="w-4 h-4 relative transition-all duration-500 ease-out group-hover:translate-x-1 group-hover:scale-110" />
+                </>
+              )}
+            </button>
+          </div>
+
+          {/* Error message */}
+          {showError && (
+            <p className="text-red-400 text-xs mt-2 ml-4">{error}</p>
           )}
-        </button>
-      </div>
+        </div>
+      )}
     </motion.form>
   )
 }

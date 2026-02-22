@@ -49,6 +49,9 @@
   body {
     @apply bg-background text-foreground antialiased;
   }
+  input, button {
+    @apply border-0 rounded-none appearance-none;
+  }
 }
 
 /* Font families */
@@ -58,4 +61,18 @@
 
 .font-sans {
   font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Override browser autofill styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 9999px transparent inset !important;
+  -webkit-text-fill-color: #FAFAF8 !important;
+  background-color: transparent !important;
+  background-clip: text !important;
+  -webkit-background-clip: text !important;
+  transition: background-color 9999s ease-in-out 0s, -webkit-box-shadow 9999s ease-in-out 0s;
+  caret-color: #FAFAF8;
 }

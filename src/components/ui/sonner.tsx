@@ -32,6 +32,13 @@ const Toaster = ({ ...props }: ToasterProps) => {
           "--border-radius": "var(--radius)",
         } as React.CSSProperties
       }
+      toastOptions={{
+        classNames: {
+          toast: "justify-center",
+          title: "text-center",
+          description: "text-center",
+        },
+      }}
       {...props}
     />
   )

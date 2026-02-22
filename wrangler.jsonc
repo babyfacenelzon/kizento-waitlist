@@ -1,18 +1,44 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "kizento-waitlist",
-  "main": ".open-next/worker.js",
-  "compatibility_date": "2024-12-01",
-  "compatibility_flags": ["nodejs_compat"],
-
-  // Static assets
-  "assets": {
-    "binding": "ASSETS",
-    "directory": ".open-next/assets"
-  },
-
-  // Environment variables (set in Cloudflare dashboard for production)
-  "vars": {
-    "NEXTJS_ENV": "production"
-  }
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "kizento-waitlist",
+	"main": ".open-next/worker.js",
+	"compatibility_date": "2024-12-01",
+	"compatibility_flags": [
+		"nodejs_compat",
+		"global_fetch_strictly_public"
+	],
+	// Static assets
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".open-next/assets"
+	},
+	// KV namespace for waitlist emails
+	"kv_namespaces": [
+		{
+			"binding": "WAITLIST",
+			"id": "d1c9e0a9b47844e68c5ce411bb44c08a"
+		}
+	],
+	// Environment variables
+	"vars": {
+		"NEXTJS_ENV": "production",
+		"META_PIXEL_ID": "899430996286879"
+	},
+	"observability": {
+		"logs": {
+			"enabled": true,
+			"head_sampling_rate": 1,
+			"invocation_logs": true,
+			"persist": true
+		}
+	},
+	"routes": [
+		{
+			"pattern": "kizento.com",
+			"zone_name": "kizento.com",
+			"custom_domain": true
+		}
+	],
+	"workers_dev": true,
+	"preview_urls": true
 }

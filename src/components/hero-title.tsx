@@ -16,8 +16,7 @@ export function HeroTitle(): React.ReactElement {
         <span className="italic">réinventé.</span>
       </h1>
       <p className="mt-6 text-lg text-white/70 max-w-md mx-auto">
-        Bentos isothermes premium, design japonais. Soyez les premiers informés
-        du lancement.
+Des bentos isothermes qui gardent vos repas chauds pendant 5h. Rejoignez la liste d&apos;attente.
       </p>
     </motion.div>
   )
